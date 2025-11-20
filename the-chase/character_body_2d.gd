@@ -19,3 +19,11 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_hitbox_body_entered(body: CharacterBody2D) -> void:
+	print("Death")
+
+
+func _on_area_2d_body_entered(body: CharacterBody2D) -> void:
+	print("Death")

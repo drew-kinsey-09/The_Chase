@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bk8f33t000c6y"]
+[gd_scene load_steps=14 format=3 uid="uid://bk8f33t000c6y"]
 
 [ext_resource type="Texture2D" uid="uid://755f0l2xp2fd" path="res://tileable-grass_clover_tt7010116-sample_1.png" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://cporsb3x0kcbh" path="res://character_body_2d.gd" id="2_1bvp3"]
@@ -281,6 +281,12 @@ sources/0 = SubResource("TileSetAtlasSource_1bvp3")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
 size = Vector2(127, 124)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
+size = Vector2(80, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
+size = Vector2(152, 400)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -302,26 +308,39 @@ texture = ExtResource("2_h2yge")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
 
+[node name="hitbox" type="Area2D" parent="Player"]
+
+[node name="hitbox_area" type="CollisionShape2D" parent="Player/hitbox"]
+shape = SubResource("RectangleShape2D_5vw27")
+
 [node name="Key" type="Node2D" parent="."]
 
 [node name="Area2D" parent="Key" instance=ExtResource("4_1bvp3")]
 position = Vector2(1296, -200)
 
-[node name="Door" type="Node2D" parent="."]
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Door" type="Node2D" parent="Area2D"]
 script = ExtResource("6_272bh")
 
-[node name="opened" type="Sprite2D" parent="Door"]
+[node name="opened" type="Sprite2D" parent="Area2D/Door"]
 visible = false
 modulate = Color(0, 0, 0, 1)
 position = Vector2(2056, 56)
 texture = ExtResource("6_7mycd")
 
-[node name="closed" type="Sprite2D" parent="Door"]
+[node name="closed" type="Sprite2D" parent="Area2D/Door"]
 position = Vector2(2056, 56)
 texture = ExtResource("6_7mycd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2100, 56)
+shape = SubResource("RectangleShape2D_kek77")
 
 [node name="Enemy" parent="." instance=ExtResource("7_272bh")]
 position = Vector2(-512, 208)
 script = ExtResource("8_5vw27")
 
-[connection signal="door_opened" from="Key/Area2D" to="Door" method="_on_area_2d_door_opened"]
+[connection signal="body_entered" from="Player/hitbox" to="Enemy" method="_on_hitbox_body_entered"]
+[connection signal="door_opened" from="Key/Area2D" to="Area2D/Door" method="_on_area_2d_door_opened"]
+[connection signal="body_entered" from="Area2D" to="Player" method="_on_area_2d_body_entered"]

@@ -9,3 +9,7 @@ func _physics_process(delta):
 	if player:
 		velocity = position.direction_to(player.position) * run_speed
 	move_and_slide()
+
+
+func _on_hitbox_body_entered(body: CharacterBody2D) -> void:
+	pass
