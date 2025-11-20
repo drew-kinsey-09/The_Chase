@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2ejs6ur4m8ql"]
+
+[ext_resource type="Script" uid="uid://16na6p7dl2f0" path="res://button.gd" id="1_r04n3"]
+
+[node name="Button" type="CanvasLayer"]
+script = ExtResource("1_r04n3")
+
+[node name="Press_button" type="Label" parent="."]
+modulate = Color(0.080841504, 0.44391093, 0.99999994, 1)
+offset_left = 416.0
+offset_top = 216.0
+offset_right = 670.0
+offset_bottom = 274.0
+text = "Press start button to begin game"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Start_button" type="Button" parent="."]
+modulate = Color(0.08235294, 0.44313726, 1, 1)
+offset_left = 480.0
+offset_top = 288.0
+offset_right = 607.0
+offset_bottom = 372.0
+text = "START"
+
+[node name="Controlls" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+offset_left = 368.0
+offset_top = 112.0
+offset_right = 716.0
+offset_bottom = 187.0
+text = "Press <space> to jump
+Press the arrows to move right or left
+Avoid the enemy"
+horizontal_alignment = 1
+uppercase = true
+
+[connection signal="pressed" from="Start_button" to="." method="_on_start_button_pressed"]
