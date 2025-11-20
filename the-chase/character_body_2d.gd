@@ -26,4 +26,4 @@ func _on_hitbox_body_entered(body: CharacterBody2D) -> void:
 
 
 func _on_area_2d_body_entered(body: CharacterBody2D) -> void:
-	print("Death")
+	print("D")
