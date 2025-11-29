@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal lose 
+
 var run_speed = 350
 var can_move = false
 @onready var player = $"../Player"
@@ -13,6 +15,7 @@ func _physics_process(delta):
 		if player:
 			velocity = position.direction_to(player.position) * run_speed
 		move_and_slide()
+		
 
 
 
@@ -22,3 +25,11 @@ func _on_button_start_game() -> void:
 
 func _on_player_win() -> void:
 	can_move = false
+
+
+
+func _on_hitbox_body_entered(body: PhysicsBody2D) -> void:
+	can_move = false
+	lose.emit()
+	print ("lose")
+	

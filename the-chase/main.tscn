@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bk8f33t000c6y"]
+[gd_scene load_steps=19 format=3 uid="uid://bk8f33t000c6y"]
 
 [ext_resource type="Texture2D" uid="uid://755f0l2xp2fd" path="res://tileable-grass_clover_tt7010116-sample_1.png" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://cporsb3x0kcbh" path="res://character_body_2d.gd" id="2_1bvp3"]
@@ -283,17 +283,14 @@ tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_1bvp3")
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
-size = Vector2(127, 124)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
 size = Vector2(64, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(127.5, 128)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
 size = Vector2(152, 400)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycdy4"]
-size = Vector2(149.33333, 138.66667)
 
 [node name="Node2D" type="Node2D"]
 
@@ -306,6 +303,11 @@ layer_0/tile_data = PackedInt32Array(196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 1
 position = Vector2(0, 224)
 script = ExtResource("2_1bvp3")
 
+[node name="hitbox" type="Area2D" parent="Player"]
+
+[node name="hitbox_area" type="CollisionShape2D" parent="Player/hitbox"]
+shape = SubResource("RectangleShape2D_5vw27")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_7mycd")
@@ -317,60 +319,50 @@ texture = ExtResource("2_h2yge")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
 
-[node name="hitbox" type="Area2D" parent="Player"]
-
-[node name="hitbox_area" type="CollisionShape2D" parent="Player/hitbox"]
-shape = SubResource("RectangleShape2D_5vw27")
-
 [node name="Key" type="Node2D" parent="."]
 
 [node name="Area2D" parent="Key" instance=ExtResource("4_1bvp3")]
 position = Vector2(1296, -200)
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="door_detection" type="Area2D" parent="."]
 
-[node name="Door" type="Node2D" parent="Area2D"]
+[node name="Door" type="Node2D" parent="door_detection"]
 script = ExtResource("6_272bh")
 
-[node name="opened" type="Sprite2D" parent="Area2D/Door"]
+[node name="opened" type="Sprite2D" parent="door_detection/Door"]
 visible = false
 modulate = Color(0, 0, 0, 1)
 position = Vector2(2056, 56)
 texture = ExtResource("6_7mycd")
 
-[node name="closed" type="Sprite2D" parent="Area2D/Door"]
+[node name="closed" type="Sprite2D" parent="door_detection/Door"]
 position = Vector2(2056, 56)
 texture = ExtResource("6_7mycd")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="door_detection"]
 position = Vector2(2100, 56)
 shape = SubResource("RectangleShape2D_kek77")
-
-[node name="Enemy" parent="." instance=ExtResource("7_272bh")]
-position = Vector2(-512, 208)
-script = ExtResource("8_5vw27")
-
-[node name="enemy_hitbox" type="Area2D" parent="Enemy"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/enemy_hitbox"]
-position = Vector2(0, -5.3333435)
-shape = SubResource("RectangleShape2D_ycdy4")
 
 [node name="Button" parent="." instance=ExtResource("9_kek77")]
 
 [node name="lost" parent="." instance=ExtResource("10_ycdy4")]
-visible = false
 script = ExtResource("11_w48qg")
 
 [node name="win" parent="." instance=ExtResource("10_efxa6")]
 script = ExtResource("11_dg77c")
 
-[connection signal="lose" from="Player" to="lost" method="_on_player_lose"]
+[node name="Enemy" parent="." instance=ExtResource("7_272bh")]
+position = Vector2(-512, 208)
+motion_mode = 1
+script = ExtResource("8_5vw27")
+
 [connection signal="win" from="Player" to="Enemy" method="_on_player_win"]
 [connection signal="win" from="Player" to="win" method="_on_player_win"]
 [connection signal="body_entered" from="Player/hitbox" to="Player" method="_on_hitbox_body_entered"]
-[connection signal="door_opened" from="Key/Area2D" to="Area2D/Door" method="_on_area_2d_door_opened"]
-[connection signal="body_entered" from="Area2D" to="Player" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Enemy/enemy_hitbox" to="Player" method="_on_enemy_hitbox_body_entered"]
+[connection signal="body_entered" from="Player/hitbox" to="Enemy" method="_on_hitbox_body_entered"]
+[connection signal="door_opened" from="Key/Area2D" to="door_detection/Door" method="_on_area_2d_door_opened"]
+[connection signal="body_entered" from="door_detection" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="start_game" from="Button" to="Player" method="_on_button_start_game"]
 [connection signal="start_game" from="Button" to="Enemy" method="_on_button_start_game"]
+[connection signal="start_game" from="Button" to="lost" method="_on_button_start_game"]
+[connection signal="lose" from="Enemy" to="lost" method="_on_enemy_lose"]
