@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://drulghqyrqivo"]
+[gd_scene load_steps=2 format=3 uid="uid://drulghqyrqivo"]
+
+[ext_resource type="Script" uid="uid://cqnfrmghu7m7h" path="res://restart_win.gd" id="1_wao2c"]
 
 [node name="win" type="CanvasLayer"]
 
@@ -15,6 +17,7 @@ offset_top = 328.0
 offset_right = 553.0
 offset_bottom = 359.0
 text = "Restart"
+script = ExtResource("1_wao2c")
 
 [node name="new_level" type="Button" parent="."]
 offset_left = 600.0
@@ -23,3 +26,5 @@ offset_right = 705.0
 offset_bottom = 374.0
 text = "Next Level
 (In Progress)"
+
+[connection signal="pressed" from="restart_win" to="restart_win" method="_on_pressed"]

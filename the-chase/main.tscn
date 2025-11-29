@@ -319,6 +319,12 @@ texture = ExtResource("2_h2yge")
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
 
+[node name="Enemy" parent="." instance=ExtResource("7_272bh")]
+position = Vector2(-512, 224)
+scale = Vector2(0.5, 0.5)
+motion_mode = 1
+script = ExtResource("8_5vw27")
+
 [node name="Key" type="Node2D" parent="."]
 
 [node name="Area2D" parent="Key" instance=ExtResource("4_1bvp3")]
@@ -351,18 +357,14 @@ script = ExtResource("11_w48qg")
 [node name="win" parent="." instance=ExtResource("10_efxa6")]
 script = ExtResource("11_dg77c")
 
-[node name="Enemy" parent="." instance=ExtResource("7_272bh")]
-position = Vector2(-512, 208)
-motion_mode = 1
-script = ExtResource("8_5vw27")
-
 [connection signal="win" from="Player" to="Enemy" method="_on_player_win"]
 [connection signal="win" from="Player" to="win" method="_on_player_win"]
 [connection signal="body_entered" from="Player/hitbox" to="Player" method="_on_hitbox_body_entered"]
 [connection signal="body_entered" from="Player/hitbox" to="Enemy" method="_on_hitbox_body_entered"]
+[connection signal="lose" from="Enemy" to="Player" method="_on_enemy_lose"]
+[connection signal="lose" from="Enemy" to="lost" method="_on_enemy_lose"]
 [connection signal="door_opened" from="Key/Area2D" to="door_detection/Door" method="_on_area_2d_door_opened"]
 [connection signal="body_entered" from="door_detection" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="start_game" from="Button" to="Player" method="_on_button_start_game"]
 [connection signal="start_game" from="Button" to="Enemy" method="_on_button_start_game"]
 [connection signal="start_game" from="Button" to="lost" method="_on_button_start_game"]
-[connection signal="lose" from="Enemy" to="lost" method="_on_enemy_lose"]

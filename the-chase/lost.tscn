@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://ddtf6gkk31sfk"]
+[gd_scene load_steps=2 format=3 uid="uid://ddtf6gkk31sfk"]
+
+[ext_resource type="Script" uid="uid://dnmjthq2xesvu" path="res://restart_loss.gd" id="1_ugjck"]
 
 [node name="lost" type="CanvasLayer"]
 
@@ -15,3 +17,6 @@ offset_top = 304.0
 offset_right = 609.0
 offset_bottom = 335.0
 text = "Restart"
+script = ExtResource("1_ugjck")
+
+[connection signal="pressed" from="restart_loss" to="restart_loss" method="_on_pressed"]

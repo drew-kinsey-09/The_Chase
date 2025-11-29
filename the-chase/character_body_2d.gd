@@ -31,3 +31,7 @@ func _on_area_2d_body_entered(body: CharacterBody2D) -> void:
 
 func _on_button_start_game() -> void:
 	can_move = true
+
+
+func _on_enemy_lose() -> void:
+	can_move = false
