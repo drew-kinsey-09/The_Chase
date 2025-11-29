@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://btagaxa4lbaug"]
+
+[ext_resource type="Script" uid="uid://cporsb3x0kcbh" path="res://character_body_2d.gd" id="1_r3jqh"]
+[ext_resource type="Texture2D" uid="uid://cpx5ppiwwc6lb" path="res://icon.svg" id="2_11i6m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7mycd"]
+size = Vector2(127.5, 128)
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_r3jqh")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="hitbox_area" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("RectangleShape2D_5vw27")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_7mycd")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_11i6m")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+
+[connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

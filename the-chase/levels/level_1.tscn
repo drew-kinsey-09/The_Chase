@@ -1,21 +1,22 @@
-[gd_scene load_steps=19 format=3 uid="uid://bk8f33t000c6y"]
+[gd_scene load_steps=20 format=3 uid="uid://bk8f33t000c6y"]
 
-[ext_resource type="Texture2D" uid="uid://755f0l2xp2fd" path="res://tileable-grass_clover_tt7010116-sample_1.png" id="1_0xm2m"]
-[ext_resource type="Script" uid="uid://cporsb3x0kcbh" path="res://character_body_2d.gd" id="2_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://cpx5ppiwwc6lb" path="res://icon.svg" id="2_h2yge"]
-[ext_resource type="PackedScene" uid="uid://cf53qfm1efyio" path="res://area_2d.tscn" id="4_1bvp3"]
-[ext_resource type="Texture2D" uid="uid://dejvbhmn1xif4" path="res://pixel_door.png" id="6_7mycd"]
-[ext_resource type="Script" uid="uid://c87uqclomdwjv" path="res://door.gd" id="6_272bh"]
-[ext_resource type="PackedScene" uid="uid://c2efg3l7it3hb" path="res://enemy.tscn" id="7_272bh"]
-[ext_resource type="Script" uid="uid://bqoccdbk63cf6" path="res://enemy.gd" id="8_5vw27"]
-[ext_resource type="PackedScene" uid="uid://d2ejs6ur4m8ql" path="res://button.tscn" id="9_kek77"]
-[ext_resource type="PackedScene" uid="uid://drulghqyrqivo" path="res://win.tscn" id="10_efxa6"]
-[ext_resource type="PackedScene" uid="uid://ddtf6gkk31sfk" path="res://lost.tscn" id="10_ycdy4"]
-[ext_resource type="Script" uid="uid://cnwibr6i1yrei" path="res://win.gd" id="11_dg77c"]
-[ext_resource type="Script" uid="uid://btda04lyiqq17" path="res://lost.gd" id="11_w48qg"]
+[ext_resource type="Texture2D" uid="uid://755f0l2xp2fd" path="res://tileable-grass_clover_tt7010116-sample_1.png" id="1_1fput"]
+[ext_resource type="Script" uid="uid://cporsb3x0kcbh" path="res://character_body_2d.gd" id="2_6yxbg"]
+[ext_resource type="Texture2D" uid="uid://cpx5ppiwwc6lb" path="res://icon.svg" id="3_4fc0e"]
+[ext_resource type="PackedScene" uid="uid://c2efg3l7it3hb" path="res://enemy.tscn" id="4_21ko3"]
+[ext_resource type="Script" uid="uid://bqoccdbk63cf6" path="res://enemy.gd" id="5_s07ge"]
+[ext_resource type="PackedScene" uid="uid://cf53qfm1efyio" path="res://key.tscn" id="6_iwo8l"]
+[ext_resource type="Script" uid="uid://c87uqclomdwjv" path="res://door.gd" id="7_j7211"]
+[ext_resource type="Texture2D" uid="uid://dejvbhmn1xif4" path="res://pixel_door.png" id="8_fd7wu"]
+[ext_resource type="PackedScene" uid="uid://d2ejs6ur4m8ql" path="res://button.tscn" id="9_m080e"]
+[ext_resource type="PackedScene" uid="uid://ddtf6gkk31sfk" path="res://lost.tscn" id="10_nljbn"]
+[ext_resource type="Script" uid="uid://btda04lyiqq17" path="res://lost.gd" id="11_w23s1"]
+[ext_resource type="PackedScene" uid="uid://drulghqyrqivo" path="res://win.tscn" id="12_n1xy8"]
+[ext_resource type="Script" uid="uid://cnwibr6i1yrei" path="res://win.gd" id="13_3yxmn"]
+[ext_resource type="Script" uid="uid://d3qglabsfde1g" path="res://key.gd" id="14_6yxbg"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1bvp3"]
-texture = ExtResource("1_0xm2m")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iivgo"]
+texture = ExtResource("1_1fput")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
@@ -281,7 +282,7 @@ texture_region_size = Vector2i(128, 128)
 [sub_resource type="TileSet" id="TileSet_lquwl"]
 tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_1bvp3")
+sources/0 = SubResource("TileSetAtlasSource_iivgo")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5vw27"]
 size = Vector2(64, 64)
@@ -301,7 +302,7 @@ layer_0/tile_data = PackedInt32Array(196603, 0, 0, 196604, 0, 0, 196605, 0, 0, 1
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(0, 224)
-script = ExtResource("2_1bvp3")
+script = ExtResource("2_6yxbg")
 
 [node name="hitbox" type="Area2D" parent="Player"]
 
@@ -314,48 +315,47 @@ shape = SubResource("RectangleShape2D_7mycd")
 
 [node name="Icon" type="Sprite2D" parent="Player"]
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_h2yge")
+texture = ExtResource("3_4fc0e")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
 
-[node name="Enemy" parent="." instance=ExtResource("7_272bh")]
+[node name="Enemy" parent="." instance=ExtResource("4_21ko3")]
 position = Vector2(-512, 224)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(1, 1)
 motion_mode = 1
-script = ExtResource("8_5vw27")
-
-[node name="Key" type="Node2D" parent="."]
-
-[node name="Area2D" parent="Key" instance=ExtResource("4_1bvp3")]
-position = Vector2(1296, -200)
+script = ExtResource("5_s07ge")
 
 [node name="door_detection" type="Area2D" parent="."]
 
 [node name="Door" type="Node2D" parent="door_detection"]
-script = ExtResource("6_272bh")
+script = ExtResource("7_j7211")
 
 [node name="opened" type="Sprite2D" parent="door_detection/Door"]
 visible = false
 modulate = Color(0, 0, 0, 1)
 position = Vector2(2056, 56)
-texture = ExtResource("6_7mycd")
+texture = ExtResource("8_fd7wu")
 
 [node name="closed" type="Sprite2D" parent="door_detection/Door"]
 position = Vector2(2056, 56)
-texture = ExtResource("6_7mycd")
+texture = ExtResource("8_fd7wu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="door_detection"]
 position = Vector2(2100, 56)
 shape = SubResource("RectangleShape2D_kek77")
 
-[node name="Button" parent="." instance=ExtResource("9_kek77")]
+[node name="Button" parent="." instance=ExtResource("9_m080e")]
 
-[node name="lost" parent="." instance=ExtResource("10_ycdy4")]
-script = ExtResource("11_w48qg")
+[node name="lost" parent="." instance=ExtResource("10_nljbn")]
+script = ExtResource("11_w23s1")
 
-[node name="win" parent="." instance=ExtResource("10_efxa6")]
-script = ExtResource("11_dg77c")
+[node name="win" parent="." instance=ExtResource("12_n1xy8")]
+script = ExtResource("13_3yxmn")
+
+[node name="key" parent="." instance=ExtResource("6_iwo8l")]
+position = Vector2(1600, -72)
+script = ExtResource("14_6yxbg")
 
 [connection signal="win" from="Player" to="Enemy" method="_on_player_win"]
 [connection signal="win" from="Player" to="win" method="_on_player_win"]
@@ -363,8 +363,9 @@ script = ExtResource("11_dg77c")
 [connection signal="body_entered" from="Player/hitbox" to="Enemy" method="_on_hitbox_body_entered"]
 [connection signal="lose" from="Enemy" to="Player" method="_on_enemy_lose"]
 [connection signal="lose" from="Enemy" to="lost" method="_on_enemy_lose"]
-[connection signal="door_opened" from="Key/Area2D" to="door_detection/Door" method="_on_area_2d_door_opened"]
 [connection signal="body_entered" from="door_detection" to="Player" method="_on_area_2d_body_entered"]
 [connection signal="start_game" from="Button" to="Player" method="_on_button_start_game"]
 [connection signal="start_game" from="Button" to="Enemy" method="_on_button_start_game"]
 [connection signal="start_game" from="Button" to="lost" method="_on_button_start_game"]
+[connection signal="body_entered" from="key" to="door_detection/Door" method="_on_key_body_entered"]
+[connection signal="body_entered" from="key" to="key" method="_on_body_entered"]
