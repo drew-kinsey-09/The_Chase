@@ -3,14 +3,16 @@
 [ext_resource type="Texture2D" uid="uid://cpx5ppiwwc6lb" path="res://icon.svg" id="1_7k104"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7k104"]
-size = Vector2(96, 96)
+size = Vector2(170.66669, 170.66669)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-
-[node name="Icon" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
+[node name="enemy" type="CharacterBody2D"]
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_7k104")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6.357829e-07, 6.357829e-07)
+scale = Vector2(0.75, 0.75)
 shape = SubResource("RectangleShape2D_7k104")
+
+[node name="Icon" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0.09019608, 1)
+texture = ExtResource("1_7k104")

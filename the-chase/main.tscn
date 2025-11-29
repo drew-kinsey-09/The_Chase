@@ -1,14 +1,18 @@
-[gd_scene load_steps=15 format=3 uid="uid://bk8f33t000c6y"]
+[gd_scene load_steps=20 format=3 uid="uid://bk8f33t000c6y"]
 
 [ext_resource type="Texture2D" uid="uid://755f0l2xp2fd" path="res://tileable-grass_clover_tt7010116-sample_1.png" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://cporsb3x0kcbh" path="res://character_body_2d.gd" id="2_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://cpx5ppiwwc6lb" path="res://icon.svg" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://cf53qfm1efyio" path="res://area_2d.tscn" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://dejvbhmn1xif4" path="res://pixel_door.png" id="6_7mycd"]
-[ext_resource type="Script" uid="uid://d3rhssbfygu86" path="res://door.gd" id="6_272bh"]
+[ext_resource type="Script" uid="uid://c87uqclomdwjv" path="res://door.gd" id="6_272bh"]
 [ext_resource type="PackedScene" uid="uid://c2efg3l7it3hb" path="res://enemy.tscn" id="7_272bh"]
-[ext_resource type="Script" uid="uid://bqtwao7qlpjxu" path="res://enemy.gd" id="8_5vw27"]
+[ext_resource type="Script" uid="uid://bqoccdbk63cf6" path="res://enemy.gd" id="8_5vw27"]
 [ext_resource type="PackedScene" uid="uid://d2ejs6ur4m8ql" path="res://button.tscn" id="9_kek77"]
+[ext_resource type="PackedScene" uid="uid://drulghqyrqivo" path="res://win.tscn" id="10_efxa6"]
+[ext_resource type="PackedScene" uid="uid://ddtf6gkk31sfk" path="res://lost.tscn" id="10_ycdy4"]
+[ext_resource type="Script" uid="uid://cnwibr6i1yrei" path="res://win.gd" id="11_dg77c"]
+[ext_resource type="Script" uid="uid://btda04lyiqq17" path="res://lost.gd" id="11_w48qg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1bvp3"]
 texture = ExtResource("1_0xm2m")
@@ -288,6 +292,9 @@ size = Vector2(64, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kek77"]
 size = Vector2(152, 400)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ycdy4"]
+size = Vector2(149.33333, 138.66667)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
@@ -343,10 +350,27 @@ shape = SubResource("RectangleShape2D_kek77")
 position = Vector2(-512, 208)
 script = ExtResource("8_5vw27")
 
+[node name="enemy_hitbox" type="Area2D" parent="Enemy"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/enemy_hitbox"]
+position = Vector2(0, -5.3333435)
+shape = SubResource("RectangleShape2D_ycdy4")
+
 [node name="Button" parent="." instance=ExtResource("9_kek77")]
 
+[node name="lost" parent="." instance=ExtResource("10_ycdy4")]
+visible = false
+script = ExtResource("11_w48qg")
+
+[node name="win" parent="." instance=ExtResource("10_efxa6")]
+script = ExtResource("11_dg77c")
+
+[connection signal="lose" from="Player" to="lost" method="_on_player_lose"]
+[connection signal="win" from="Player" to="Enemy" method="_on_player_win"]
+[connection signal="win" from="Player" to="win" method="_on_player_win"]
 [connection signal="body_entered" from="Player/hitbox" to="Player" method="_on_hitbox_body_entered"]
 [connection signal="door_opened" from="Key/Area2D" to="Area2D/Door" method="_on_area_2d_door_opened"]
 [connection signal="body_entered" from="Area2D" to="Player" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Enemy/enemy_hitbox" to="Player" method="_on_enemy_hitbox_body_entered"]
 [connection signal="start_game" from="Button" to="Player" method="_on_button_start_game"]
 [connection signal="start_game" from="Button" to="Enemy" method="_on_button_start_game"]

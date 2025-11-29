@@ -15,9 +15,10 @@ func _physics_process(delta):
 		move_and_slide()
 
 
-func _on_hitbox_body_entered(body: CharacterBody2D) -> void:
-	pass
-
 
 func _on_button_start_game() -> void:
 	can_move = true
+
+
+func _on_player_win() -> void:
+	can_move = false

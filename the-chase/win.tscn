@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://drulghqyrqivo"]
+
+[node name="win" type="CanvasLayer"]
+
+[node name="win_label" type="Label" parent="."]
+offset_left = 504.0
+offset_top = 240.0
+offset_right = 646.0
+offset_bottom = 263.0
+text = "You Win This Time"
+
+[node name="restart_win" type="Button" parent="."]
+offset_left = 488.0
+offset_top = 328.0
+offset_right = 553.0
+offset_bottom = 359.0
+text = "Restart"
+
+[node name="new_level" type="Button" parent="."]
+offset_left = 600.0
+offset_top = 320.0
+offset_right = 705.0
+offset_bottom = 374.0
+text = "Next Level
+(In Progress)"

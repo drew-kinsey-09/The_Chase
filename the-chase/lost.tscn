@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ddtf6gkk31sfk"]
+
+[node name="lost" type="CanvasLayer"]
+
+[node name="lost_text" type="Label" parent="."]
+offset_left = 544.0
+offset_top = 232.0
+offset_right = 611.0
+offset_bottom = 255.0
+text = "You Lost"
+
+[node name="restart_loss" type="Button" parent="."]
+offset_left = 544.0
+offset_top = 304.0
+offset_right = 609.0
+offset_bottom = 335.0
+text = "Restart"
