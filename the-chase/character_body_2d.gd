@@ -4,7 +4,7 @@ signal win
 
 const SPEED = 500.0
 const JUMP_VELOCITY = -500.0
-var can_move = true
+var can_move = false
 
 
 func _physics_process(delta: float) -> void:
