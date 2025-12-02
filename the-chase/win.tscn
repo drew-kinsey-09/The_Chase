@@ -10,23 +10,23 @@ offset_left = 504.0
 offset_top = 240.0
 offset_right = 646.0
 offset_bottom = 263.0
-text = "You Win This Time"
+text = "Level Cleared"
+horizontal_alignment = 1
 
 [node name="restart_win" type="Button" parent="."]
-offset_left = 488.0
+offset_left = 472.0
 offset_top = 328.0
-offset_right = 553.0
+offset_right = 568.0
 offset_bottom = 359.0
 text = "Restart"
 script = ExtResource("1_wao2c")
 
 [node name="new_level" type="Button" parent="."]
-offset_left = 600.0
-offset_top = 320.0
-offset_right = 705.0
-offset_bottom = 374.0
-text = "Next Level
-(In Progress)"
+offset_left = 592.0
+offset_top = 328.0
+offset_right = 688.0
+offset_bottom = 360.0
+text = "Next Level"
 script = ExtResource("2_hgi8f")
 
 [connection signal="pressed" from="restart_win" to="restart_win" method="_on_pressed"]
