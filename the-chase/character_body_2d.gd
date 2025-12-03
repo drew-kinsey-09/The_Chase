@@ -1,6 +1,7 @@
 extends CharacterBody2D
  
 signal win
+signal lose
 
 const SPEED = 500.0
 const JUMP_VELOCITY = -500.0
@@ -26,7 +27,6 @@ func _physics_process(delta: float) -> void:
 
 func _on_area_2d_body_entered(body: CharacterBody2D) -> void:
 	win.emit()
-	print("win")
 
 
 func _on_button_start_game() -> void:
@@ -35,3 +35,11 @@ func _on_button_start_game() -> void:
 
 func _on_enemy_lose() -> void:
 	can_move = false
+
+
+func _on_door_body_entered(body: Node2D) -> void:
+	win.emit()
+
+
+func _on_hitbox_body_entered(body: CharacterBody2D) -> void:
+	lose.emit()

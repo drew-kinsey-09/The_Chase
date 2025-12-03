@@ -13,8 +13,10 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_player_lose() -> void:
-	$lost_text.visible = true
-	$restart_loss.visible = true
+	loss += 1
+	if loss > 1:
+		$lost_text.visible = true
+		$restart_loss.visible = true
 
 
 func _on_enemy_lose() -> void:

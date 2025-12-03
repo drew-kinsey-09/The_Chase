@@ -358,7 +358,7 @@ script = ExtResource("10_i6od7")
 script = ExtResource("12_ntdhj")
 
 [node name="key" parent="." instance=ExtResource("13_0fu15")]
-position = Vector2(1600, -72)
+position = Vector2(1600, -64)
 script = ExtResource("14_4knja")
 
 [connection signal="win" from="Player" to="Enemy" method="_on_player_win"]
@@ -372,4 +372,5 @@ script = ExtResource("14_4knja")
 [connection signal="start_game" from="Button" to="Enemy" method="_on_button_start_game"]
 [connection signal="start_game" from="Button" to="lost" method="_on_button_start_game"]
 [connection signal="body_entered" from="key" to="door_detection/Door" method="_on_key_body_entered"]
+[connection signal="body_entered" from="key" to="win" method="_on_key_body_entered"]
 [connection signal="body_entered" from="key" to="key" method="_on_body_entered"]

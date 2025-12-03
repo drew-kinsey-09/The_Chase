@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var key_taken = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$win_label.visible = false
@@ -12,6 +14,11 @@ func _process(delta: float) -> void:
 
 
 func _on_player_win() -> void:
-	$win_label.visible = true
-	$restart_win.visible = true
-	$new_level.visible = true
+	if key_taken:
+		$win_label.visible = true
+		$restart_win.visible = true
+		$new_level.visible = true
+
+
+func _on_key_body_entered(body: Node2D) -> void:
+	key_taken = true

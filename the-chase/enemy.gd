@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal lose 
 
+var key_taken = false
 var run_speed = 400
 var can_move = false
 @onready var player = $"../Player"
@@ -24,12 +25,15 @@ func _on_button_start_game() -> void:
 
 
 func _on_player_win() -> void:
-	can_move = false
+	if key_taken:
+		can_move = false
 
 
 
 func _on_hitbox_body_entered(body: PhysicsBody2D) -> void:
 	can_move = false
 	lose.emit()
-	print ("lose")
-	
+
+
+func _on_key_body_entered(body: Node2D) -> void:
+	key_taken = true

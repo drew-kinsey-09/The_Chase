@@ -1,11 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://da3kbyx122lk7"]
+[gd_scene load_steps=17 format=3 uid="uid://da3kbyx122lk7"]
 
 [ext_resource type="Texture2D" uid="uid://755f0l2xp2fd" path="res://tileable-grass_clover_tt7010116-sample_1.png" id="1_mi4ay"]
 [ext_resource type="PackedScene" uid="uid://cf53qfm1efyio" path="res://key.tscn" id="2_pqqg8"]
 [ext_resource type="PackedScene" uid="uid://btagaxa4lbaug" path="res://player.tscn" id="3_v5uil"]
 [ext_resource type="PackedScene" uid="uid://c2efg3l7it3hb" path="res://enemy.tscn" id="4_5722l"]
 [ext_resource type="Script" uid="uid://bqoccdbk63cf6" path="res://enemy.gd" id="5_5722l"]
+[ext_resource type="PackedScene" uid="uid://b238rg270r11u" path="res://door.tscn" id="5_ep78u"]
+[ext_resource type="Script" uid="uid://c87uqclomdwjv" path="res://door.gd" id="6_dfjjl"]
 [ext_resource type="PackedScene" uid="uid://d2ejs6ur4m8ql" path="res://button.tscn" id="6_ilhis"]
+[ext_resource type="Script" uid="uid://d3qglabsfde1g" path="res://key.gd" id="8_at1ld"]
+[ext_resource type="PackedScene" uid="uid://ddtf6gkk31sfk" path="res://lost.tscn" id="10_vm7no"]
+[ext_resource type="PackedScene" uid="uid://drulghqyrqivo" path="res://win.tscn" id="11_hbb88"]
+[ext_resource type="Script" uid="uid://btda04lyiqq17" path="res://lost.gd" id="11_wcjpl"]
+[ext_resource type="Script" uid="uid://cnwibr6i1yrei" path="res://win.gd" id="13_5orea"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ilhis"]
 
@@ -13,7 +20,7 @@
 texture = ExtResource("1_mi4ay")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, -64, 64)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 64, 64, 64, 64, -64, -64, -64)
 1:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
@@ -39,10 +46,31 @@ position = Vector2(32, 224)
 scale = Vector2(1, 1)
 script = ExtResource("5_5722l")
 
+[node name="door" parent="." instance=ExtResource("5_ep78u")]
+position = Vector2(4664, 1920)
+script = ExtResource("6_dfjjl")
+
 [node name="key" parent="." instance=ExtResource("2_pqqg8")]
 position = Vector2(3976, 824)
+script = ExtResource("8_at1ld")
 
 [node name="Button" parent="." instance=ExtResource("6_ilhis")]
 
+[node name="lost" parent="." instance=ExtResource("10_vm7no")]
+script = ExtResource("11_wcjpl")
+
+[node name="win" parent="." instance=ExtResource("11_hbb88")]
+script = ExtResource("13_5orea")
+
+[connection signal="lose" from="Player" to="lost" method="_on_player_lose"]
+[connection signal="win" from="Player" to="enemy" method="_on_player_win"]
+[connection signal="win" from="Player" to="win" method="_on_player_win"]
+[connection signal="lose" from="enemy" to="Player" method="_on_enemy_lose"]
+[connection signal="lose" from="enemy" to="lost" method="_on_enemy_lose"]
+[connection signal="body_entered" from="door" to="Player" method="_on_door_body_entered"]
+[connection signal="body_entered" from="key" to="enemy" method="_on_key_body_entered"]
+[connection signal="body_entered" from="key" to="door" method="_on_key_body_entered"]
+[connection signal="body_entered" from="key" to="key" method="_on_body_entered"]
+[connection signal="body_entered" from="key" to="win" method="_on_key_body_entered"]
 [connection signal="start_game" from="Button" to="Player" method="_on_button_start_game"]
 [connection signal="start_game" from="Button" to="enemy" method="_on_button_start_game"]
