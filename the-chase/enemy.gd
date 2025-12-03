@@ -3,7 +3,7 @@ extends CharacterBody2D
 signal lose 
 
 var key_taken = false
-var run_speed = 400
+var run_speed = 450
 var can_move = false
 @onready var player = $"../Player"
 
