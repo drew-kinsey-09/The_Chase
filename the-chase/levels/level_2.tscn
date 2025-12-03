@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://da3kbyx122lk7"]
+[gd_scene load_steps=18 format=3 uid="uid://da3kbyx122lk7"]
 
 [ext_resource type="Texture2D" uid="uid://755f0l2xp2fd" path="res://tileable-grass_clover_tt7010116-sample_1.png" id="1_mi4ay"]
 [ext_resource type="PackedScene" uid="uid://cf53qfm1efyio" path="res://key.tscn" id="2_pqqg8"]
@@ -14,9 +14,9 @@
 [ext_resource type="Script" uid="uid://btda04lyiqq17" path="res://lost.gd" id="11_wcjpl"]
 [ext_resource type="Script" uid="uid://cnwibr6i1yrei" path="res://win.gd" id="13_5orea"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ilhis"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wcjpl"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pqqg8"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5orea"]
 texture = ExtResource("1_mi4ay")
 texture_region_size = Vector2i(128, 128)
 0:0/0 = 0
@@ -28,8 +28,11 @@ texture_region_size = Vector2i(128, 128)
 [sub_resource type="TileSet" id="TileSet_0srwa"]
 tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
-physics_layer_0/physics_material = SubResource("PhysicsMaterial_ilhis")
-sources/0 = SubResource("TileSetAtlasSource_pqqg8")
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_wcjpl")
+sources/0 = SubResource("TileSetAtlasSource_5orea")
+
+[sub_resource type="LabelSettings" id="LabelSettings_wcjpl"]
+font_size = 50
 
 [node name="level_2" type="Node2D"]
 
@@ -62,6 +65,15 @@ script = ExtResource("11_wcjpl")
 [node name="win" parent="." instance=ExtResource("11_hbb88")]
 script = ExtResource("13_5orea")
 
+[node name="label2" type="Label" parent="."]
+offset_left = 440.0
+offset_top = 8.0
+offset_right = 623.0
+offset_bottom = 77.0
+text = "LEVEL 2"
+label_settings = SubResource("LabelSettings_wcjpl")
+
+[connection signal="lose" from="Player" to="enemy" method="_on_player_lose"]
 [connection signal="lose" from="Player" to="lost" method="_on_player_lose"]
 [connection signal="win" from="Player" to="enemy" method="_on_player_win"]
 [connection signal="win" from="Player" to="win" method="_on_player_win"]

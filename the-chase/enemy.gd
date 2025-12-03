@@ -37,3 +37,7 @@ func _on_hitbox_body_entered(body: PhysicsBody2D) -> void:
 
 func _on_key_body_entered(body: Node2D) -> void:
 	key_taken = true
+
+
+func _on_player_lose() -> void:
+	can_move = false
