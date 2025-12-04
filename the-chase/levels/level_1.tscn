@@ -1,7 +1,7 @@
 [gd_scene load_steps=22 format=3 uid="uid://bk8f33t000c6y"]
 
 [ext_resource type="Texture2D" uid="uid://755f0l2xp2fd" path="res://tileable-grass_clover_tt7010116-sample_1.png" id="1_betor"]
-[ext_resource type="Script" uid="uid://cporsb3x0kcbh" path="res://character_body_2d.gd" id="2_vjtdm"]
+[ext_resource type="Script" uid="uid://cporsb3x0kcbh" path="res://player.gd" id="2_vjtdm"]
 [ext_resource type="Texture2D" uid="uid://cpx5ppiwwc6lb" path="res://icon.svg" id="3_bgw3c"]
 [ext_resource type="PackedScene" uid="uid://c2efg3l7it3hb" path="res://enemy.tscn" id="4_lrvbd"]
 [ext_resource type="Script" uid="uid://bqoccdbk63cf6" path="res://enemy.gd" id="5_oqlok"]
